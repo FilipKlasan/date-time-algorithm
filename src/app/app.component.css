@@ -1,0 +1,110 @@
+#g {
+     width: 400px; 
+     height: 280px;
+     margin: auto; 
+     overflow: auto; 
+     box-shadow: 2px 2px 12px rgb(200, 200, 200);
+     padding: 31px;
+     border-radius: 8px;
+}
+#g::-webkit-scrollbar {
+    width: 8px;
+}
+#g::-webkit-scrollbar:horizontal {
+    height: 8px;
+}
+#g::-webkit-scrollbar-thumb {
+    background: rgb(193, 193, 193);
+    border-radius: 20px;
+}
+#g::-webkit-scrollbar-thumb:hover {
+    background: #888; 
+}
+.nw, .w, .zel, .bel {
+    display: inline-block; 
+    width: 37px;
+    text-align: center;
+    margin-left: 1px;
+    margin-bottom: 1px; 
+    padding: 5px;
+}
+.nw {
+     color: rgb(84, 84, 84); 
+     font-size: 14px;
+}
+.w {
+     color: rgb(27, 206, 153);  
+     font-size: 14px;
+}
+.zel {
+  
+    color: rgb(84, 84, 84);
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 2px;
+    font-size: 14px;
+}
+.zel:hover {
+    background-color: rgb(200, 200, 200);
+    color: white;
+}
+.bel {
+    background-color: white;
+    color: white;
+}
+.cardMonth {
+    width: 267px;
+    text-align: center;
+}
+#ff1, #ff2 {
+    display: inline-block; 
+    width: 44px;
+    text-align: right;
+    font-size: 14px;
+}
+#ff1 {
+    margin-right: 7px;
+}
+#ff2 {
+    margin-left: 3px;
+}
+#ampm {
+    display: inline-block; 
+    margin-left: 14px;
+}
+#am, #pm, #amEnd, #pmEnd {
+    display: inline-block;
+    font-size: 11px;
+    color: rgb(64, 64, 64); 
+}
+#am {
+    font-weight: bold;
+    margin-right: 5px;
+}
+#am:hover, #pm:hover, #amEnd:hover, #pmEnd:hover {
+    cursor: pointer;
+}
+#amEnd {
+   margin-right: 5px;
+}
+#pmEnd {
+    font-weight: bold;
+}
+@media(max-width: 734px) {
+    .cardMonth {
+        width: 222px;
+    }
+}
+@media(max-width: 400px) {
+    #g {
+        width: 320px;
+        height: 265px;
+    }
+   .nw, .w, .zel, .bel {
+       width: 31px;
+       padding: 4px;
+   }
+   #ff1, #ff2 {
+    text-align: center;
+}
+}

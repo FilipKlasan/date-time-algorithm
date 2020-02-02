@@ -1,0 +1,105 @@
+<div style="margin-top: 100px; margin-bottom: 44px; text-align: center;">
+    <mat-form-field style="width: 177px; margin-right: 15px;">
+        <mat-select placeholder="Next months to show" [(value)]="selectedVal">
+           <mat-option *ngFor="let e of select;" value="{{e}}">
+               {{e}} 
+           </mat-option>
+        </mat-select>
+     </mat-form-field>
+     <button mat-raised-button (click)="toShow()" style="outline: none;"><mat-icon>done</mat-icon></button>
+</div>
+<div id="g">
+   <div style="width: 266px;text-align: left;">
+      <h5 style="color: rgb(84, 84, 84);">{{months[currentMonth].name}}</h5>
+   </div>
+   <div *ngFor="let wd of week" [ngClass]="(wd == 'Sa' || wd == 'Su') ? 'w': 'nw'">{{wd}}</div><br>
+   <div *ngFor="let row of currentMonthArr">
+     <div mat-raised-button *ngFor="let e of row; let i = index" [ngClass]="e == '' ? 'bel': 'zel'" #x (click)="selectedDate(x, months[currentMonth].name, i)">
+        {{e}}
+     </div>
+   </div>
+   <mat-card *ngIf="months[currentMonth].name == selectedMonth && notEmptyOrNull" class="cardMonth">
+      <p style="font-weight: bold; color: rgb(64, 64, 64); font-size: 15px;">{{selectedDt}}</p>
+      <div *ngIf="dayMonth">
+        <p *ngFor="let t of timeToShow" style="color: rgb(64, 64, 64); font-size: 15px;">{{t}}</p>
+      </div>
+      <mat-icon style="margin-right: 10px;">access_time</mat-icon> <span style="font-size: 14px;">Choose a time</span> <br>
+      <form #formVal="ngForm">
+        <span style="font-size: 14px;">between</span><br>
+        <mat-form-field id="ff1">
+          <input matInput #hoursStartN="ngModel" name="hoursStartF" type="number" [(ngModel)]="hoursStart" min="1" max="12" required>
+          <mat-hint *ngIf="hoursStartN.invalid" style="color:red;">required</mat-hint>
+        </mat-form-field>:
+        <mat-form-field id="ff2">
+          <input matInput #minutesStartN="ngModel" name="minutesStartF" type="number" [(ngModel)]="minutesStart" min="0" max="59" required>
+          <mat-hint *ngIf="minutesStartN.invalid" style="color:red;">required</mat-hint>
+        </mat-form-field>
+        <div id="ampm">
+          <div #amStart id="am" (click)="amStartFu(amStart, pmStart)">AM</div>
+          <div #pmStart id="pm" (click)="pmStartFu(amStart, pmStart)">PM</div>
+        </div><br>
+        <span style="font-size: 14px;">and</span><br>
+        <mat-form-field id="ff1">
+           <input matInput #hoursEndN="ngModel" name="hoursEndF" type="number" [(ngModel)]="hoursEnd" min="1" max="12" required>
+           <mat-hint *ngIf="hoursEndN.invalid" style="color:red;">required</mat-hint>
+        </mat-form-field>:
+        <mat-form-field id="ff2">
+           <input matInput #minutesEndN="ngModel" name="minutesEndF" type="number" [(ngModel)]="minutesEnd" min="0" max="59" required>
+           <mat-hint *ngIf="minutesEndN.invalid" style="color:red;">required</mat-hint>
+        </mat-form-field>
+        <div id="ampm">
+           <div #amEnd id="amEnd" (click)="amEndFu(amEnd, pmEnd)">AM</div>
+           <div #pmEnd id="pmEnd" (click)="pmEndFu(amEnd, pmEnd)">PM</div>
+        </div><br>
+        <div *ngIf="dateTimeBool" style="color: red; margin-top: 4px; text-align: center;">{{incorrect}}</div><br>
+        <button mat-raised-button style="outline: none;" [disabled]="formVal.invalid" (click)="confirmDateAndTime()">confirm</button>
+      </form>  
+   </mat-card> <br>
+
+   <div *ngFor="let month of monthsToShowArr; let i = index;">
+      <div style="width: 266px; text-align: left;"><h5 style="color: rgb(84, 84, 84);">{{months[nextMonthIndexes[i]].name}}</h5></div>
+      <div *ngFor="let wd of week" [ngClass]="(wd == 'Sa' || wd == 'Su') ? 'w': 'nw'">{{wd}}</div>
+      <div *ngFor="let row of nextMonthsArr[i]">
+         <div *ngFor="let day of row; let j = index" [ngClass]="(day == '' || day == null) ? 'bel': 'zel'" #y (click)="selectedDate(y, months[nextMonthIndexes[i]].name, j)">
+              {{day}}
+         </div>
+      </div>
+      <mat-card *ngIf="months[nextMonthIndexes[i]].name == selectedMonth && notEmptyOrNull" class="cardMonth">
+         <p style="font-weight: bold; color: rgb(64, 64, 64); font-size: 15px;">{{selectedDt}}</p>
+         <div *ngIf="dayMonth">
+            <p *ngFor="let t of timeToShow" style="color: rgb(64, 64, 64); font-size: 15px;">{{t}}</p>
+         </div>
+         <mat-icon style="margin-right: 10px;">access_time</mat-icon> <span style="font-size: 14px;">Choose a time</span> <br>
+         <form #formVal="ngForm">
+            <span style="font-size: 14px;">between</span><br>
+            <mat-form-field id="ff1">
+               <input matInput #hoursStartN="ngModel" name="hoursStartF" type="number" [(ngModel)]="hoursStart" min="1" max="12" required>
+               <mat-hint *ngIf="hoursStartN.invalid" style="color:red;">required</mat-hint>
+            </mat-form-field>:
+            <mat-form-field id="ff2">
+               <input matInput #minutesStartN="ngModel" name="minutesStartF" type="number" [(ngModel)]="minutesStart" min="0" max="59" required>
+               <mat-hint *ngIf="minutesStartN.invalid" style="color:red;">required</mat-hint>
+            </mat-form-field>
+            <div id="ampm">
+                <div #amStart id="am" (click)="amStartFu(amStart, pmStart)">AM</div>
+                <div #pmStart id="pm" (click)="pmStartFu(amStart, pmStart)">PM</div>
+            </div><br>
+            <span style="font-size: 14px;">and</span><br>
+            <mat-form-field id="ff1">
+               <input matInput #hoursEndN="ngModel" name="hoursEndF" type="number" [(ngModel)]="hoursEnd" min="1" max="12" required>
+               <mat-hint *ngIf="hoursEndN.invalid" style="color:red;">required</mat-hint>
+            </mat-form-field>:
+            <mat-form-field id="ff2">
+               <input matInput #minutesEndN="ngModel" name="minutesEndF" type="number" [(ngModel)]="minutesEnd" min="0" max="59" required>
+               <mat-hint *ngIf="minutesEndN.invalid" style="color:red;">required</mat-hint>
+            </mat-form-field>
+            <div id="ampm">
+               <div #amEnd id="amEnd" (click)="amEndFu(amEnd, pmEnd)">AM</div>
+               <div #pmEnd id="pmEnd" (click)="pmEndFu(amEnd, pmEnd)">PM</div>
+            </div><br>
+            <div *ngIf="dateTimeBool" style="color: red; margin-top: 4px; text-align: center;">{{incorrect}}</div><br>
+            <button mat-raised-button style="outline: none;" [disabled]="formVal.invalid" (click)="confirmDateAndTime()">confirm</button>
+         </form>  
+      </mat-card><br>
+   </div>
+</div>

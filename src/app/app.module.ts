@@ -1,0 +1,38 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppComponent } from './app.component';
+import{ platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import 'hammerjs';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import {
+  MatIconModule,
+  MatButtonModule,
+  MatSelectModule,
+  MatInputModule,
+  MatMenuModule,
+  MatCardModule
+ } from '@angular/material';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatInputModule,
+    MatMenuModule,
+    MatCardModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+platformBrowserDynamic().bootstrapModule(AppModule);
